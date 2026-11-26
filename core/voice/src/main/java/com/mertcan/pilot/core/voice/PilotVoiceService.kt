@@ -17,7 +17,6 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import androidx.core.app.NotificationCompat
-import com.mertcan.pilot.core.voice.R
 import java.util.Locale
 
 /**
@@ -165,10 +164,15 @@ class PilotVoiceService : Service() {
             .replace("İ", "i")
             .trim()
 
-        if (normalized.contains("pilot kapan") ||
-            normalized.contains("pilot kapat") ||
-            normalized.contains("hey pilot kapan")
+        if (normalized.contains("pilot tamamen kapan") ||
+            normalized.contains("pilot tamamen kapat") ||
+            normalized.contains("pilot dinlemeyi birak")
         ) {
+            closePilotCompletely()
+            return
+        }
+
+        if (normalized.contains("pilot kapan") || normalized.contains("pilot kapat")) {
             closePilotSession()
             return
         }
@@ -213,7 +217,20 @@ class PilotVoiceService : Service() {
         }
     }
 
+    /**
+     * Closes the active assistant screen/session but leaves the wake listener alive,
+     * so the user can say "Hey Pilot" again without reopening the app manually.
+     */
     private fun closePilotSession() {
+        pilotAwake = false
+        updateNotification("Hey Pilot komutunu dinliyor")
+        sendPilotBroadcast(ACTION_SESSION_CLOSED)
+        speak("Tamam. Bekleme modundayım.")
+    }
+
+    /** Stops the microphone foreground service completely. */
+    private fun closePilotCompletely() {
+        pilotAwake = false
         sendPilotBroadcast(ACTION_SESSION_CLOSED)
         stopSelf()
     }

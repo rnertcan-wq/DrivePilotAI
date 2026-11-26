@@ -66,14 +66,19 @@ class MainActivity : ComponentActivity() {
                                     PilotVoiceService.EXTRA_COMMAND
                                 ) ?: "Komut alındı"
                             }
-                            PilotVoiceService.ACTION_SESSION_CLOSED,
+                            PilotVoiceService.ACTION_SESSION_CLOSED -> {
+                                isAwake = false
+                                voiceStatus = if (isListening) {
+                                    "Hey Pilot komutunu dinliyor"
+                                } else {
+                                    "Sesli asistan kapalı"
+                                }
+                                finishAndRemoveTask()
+                            }
                             PilotVoiceService.ACTION_LISTENING_STOPPED -> {
                                 isListening = false
                                 isAwake = false
                                 voiceStatus = "Sesli asistan kapalı"
-                                if (intent.action == PilotVoiceService.ACTION_SESSION_CLOSED) {
-                                    finishAndRemoveTask()
-                                }
                             }
                         }
                     }

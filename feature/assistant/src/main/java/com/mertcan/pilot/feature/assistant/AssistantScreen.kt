@@ -66,7 +66,7 @@ fun AssistantScreen(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Text("PILOT'U KAPAT")
+                Text("PILOT'U TAMAMEN KAPAT")
             }
             Text(
                 text = "PILOT • EARLY ACCESS 0.1.0",
@@ -233,7 +233,7 @@ private fun VoicePanel(
                 textAlign = TextAlign.Center
             )
             Text(
-                text = "AÇ: “Hey Pilot”     •     KAPAT: “Pilot kapan”",
+                text = "AÇ: “Hey Pilot”     •     OTURUMU KAPAT: “Pilot kapan”",
                 color = PilotColors.Accent,
                 fontSize = 11.sp,
                 textAlign = TextAlign.Center

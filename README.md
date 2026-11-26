@@ -47,7 +47,7 @@ Open this repository in Android Studio. Set the SDK location to `D:\Android\SDK`
 
 The initial wake phrase implementation uses Android's speech-recognition service as a development bridge. Android's general speech recognizer is not a production-grade always-on hotword engine: availability, offline support, battery use and background behavior depend on the device and recognition provider. A dedicated on-device wake-word model will be integrated before production release.
 
-Android does not allow an ordinary app to silently force its Activity to the foreground whenever a background wake phrase is detected. Pilot can keep a user-started microphone foreground service active with a persistent notification, respond by voice, and show a notification that the user can tap to open the cockpit. The "Pilot kapan" command stops the listening service.
+Android does not allow an ordinary app to silently force its Activity to the foreground whenever a background wake phrase is detected. Pilot can keep a user-started microphone foreground service active with a persistent notification, respond by voice, and show a notification that the user can tap to open the cockpit. The "Pilot kapan" command closes the active assistant screen/session but leaves the wake listener running. Say "Pilot tamamen kapan" or use the in-app full-stop button to stop the microphone service.
 
 ## API key safety
 
