@@ -58,7 +58,7 @@ Never commit Gemini Live or Evren API keys. The production design will use a bac
 Use Android Studio's Gradle sync and run the `app` configuration, or build with Gradle 8.13 and JDK 17:
 
 ```powershell
-gradle :app:assembleDebug
+.\\gradlew.bat :app:assembleDebug` (Windows) or `./gradlew :app:assembleDebug` (macOS/Linux)
 ```
 
 The GitHub Actions workflow builds the debug APK and publishes it as a workflow artifact.
